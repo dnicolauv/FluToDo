@@ -41,6 +41,8 @@
     <Compile Include="Data\IRestService.cs" />
     <Compile Include="Data\RestService.cs" />
     <Compile Include="Data\TodoManager.cs" />
+    <Compile Include="FabButton\FloatingActionButtonSize.cs" />
+    <Compile Include="FabButton\FloatingActionButtonView.cs" />
     <Compile Include="NewItem.xaml.cs">
       <DependentUpon>NewItem.xaml</DependentUpon>
     </Compile>

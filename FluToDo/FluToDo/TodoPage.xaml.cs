@@ -12,6 +12,7 @@ namespace FluToDo
     public partial class TodoPage : ContentPage
     { 
         public ICommand NewItemCommand { get; set; }
+
         public TodoPage()
         {
             InitializeComponent();
@@ -29,7 +30,11 @@ namespace FluToDo
         {
             base.OnAppearing();
 
-            listview.Refreshing += Listview_Refreshing; ;
+            //Removes toolbar item for Android, and uses fab button instead. Silently falls to toolbar item on iOS
+            if (Device.OS == TargetPlatform.Android)
+                ToolbarItems.Clear();
+
+            listview.Refreshing += Listview_Refreshing;
             listview.ItemsSource = await App.TodoMgr.GetDataAsync();
         }
 
@@ -39,16 +44,20 @@ namespace FluToDo
             listview.EndRefresh();
         }
 
-        private async void OnChangeStatus(object sender, EventArgs e)
+        private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var mi = ((MenuItem)sender);
+            if (e.Item == null)
+                return;
 
             TodoItem item = null;
 
-            if (mi.CommandParameter is TodoItem)
+            if (e.Item is TodoItem)
             {
-                item = (TodoItem)mi.CommandParameter;
+                item = (TodoItem)e.Item;
+
+                //Toggle the status
                 item.IsComplete = !item.IsComplete;
+
                 await App.TodoMgr.SaveItemAsync(item, false);
                 listview.BeginRefresh();
             }
@@ -67,6 +76,8 @@ namespace FluToDo
 
                 await App.TodoMgr.DeleteItemAsync(item);
                 listview.BeginRefresh();
+                string msg = String.Format("ToDo item {0} has been deleted", item.Name);
+                await DisplayAlert("Item deleted", msg, "OK");
             }
         }
     }

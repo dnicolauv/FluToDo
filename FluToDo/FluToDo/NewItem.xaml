@@ -2,24 +2,16 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FluToDo.NewItem">
- 
-  <Grid RowSpacing="5" ColumnSpacing="5">
-    <Grid.RowDefinitions>
-      <RowDefinition Height="2*" />
-      <RowDefinition Height="1*" />
-      <RowDefinition Height="1*" />
-    </Grid.RowDefinitions>
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="1*" />
-      <ColumnDefinition Width="1*" />
-    </Grid.ColumnDefinitions>
 
-    <Entry x:Name="txtName" Placeholder="Add title" FontSize="Large" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="1"/>
+  <StackLayout Orientation="Vertical" Spacing="10" Padding="5">
 
-    <Label Text="Is Complete?"  Grid.Row="1" Grid.Column="0" />  <Switch x:Name="swComplete" IsToggled="false" Grid.Row="1" Grid.Column="1" />
+    <Label FontSize="Large">Enter task title</Label>
+    
+    <Entry x:Name="txtName" FontSize="Large"/>
    
-    <Button Text="Create" x:Name="btnCreate" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="1" Command="{Binding CreateCommand}" />
-</Grid>
+    <Button HorizontalOptions="FillAndExpand" Text="ADD" x:Name="btnCreate" 
+            TextColor="White" BackgroundColor="#ff3b80" Command="{Binding CreateCommand}" />
+  </StackLayout>
   
 
 </ContentPage>
