@@ -8,9 +8,15 @@
     <Label FontSize="Large">Enter task title</Label>
     
     <Entry x:Name="txtName" FontSize="Large"/>
-   
-    <Button HorizontalOptions="FillAndExpand" Text="ADD" x:Name="btnCreate" 
-            TextColor="White" BackgroundColor="#ff3b80" Command="{Binding CreateCommand}" />
+
+    <Button HorizontalOptions="FillAndExpand" Text="ADD" x:Name="btnCreate" Command="{Binding CreateCommand}">
+      <Button.BackgroundColor>
+        <OnPlatform x:TypeArguments="Color" Android="#ff3b80"></OnPlatform>
+      </Button.BackgroundColor>
+      <Button.TextColor>
+        <OnPlatform x:TypeArguments="Color" Android="White"></OnPlatform>
+      </Button.TextColor>
+    </Button>
   </StackLayout>
   
 

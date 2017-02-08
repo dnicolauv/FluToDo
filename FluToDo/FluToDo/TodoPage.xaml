@@ -5,11 +5,7 @@
              x:Class="FluToDo.TodoPage">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="New Item" Command="{Binding NewItemCommand}" Order="Primary" Priority="0">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource" Android="ic_add.png" iOS="ic_add.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
+    <ToolbarItem Name="New Item" Command="{Binding NewItemCommand}" Order="Primary" Priority="0" />
   </ContentPage.ToolbarItems>
 
 <AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
