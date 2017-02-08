@@ -21,9 +21,10 @@ namespace FluToDo
             this.CreateCommand = new Command(async (sender) =>
             {
                 TodoItem item = new TodoItem();
-                item.IsComplete = swComplete.IsToggled;
+                item.IsComplete = false;
                 item.Name = txtName.Text;
                 await App.TodoMgr.SaveItemAsync(item, true);
+                await App.TodoMgr.GetDataAsync();
                 await App.Current.MainPage.Navigation.PopAsync(true);
             });
 

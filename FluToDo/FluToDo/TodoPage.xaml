@@ -1,35 +1,39 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:fab="clr-namespace:FluToDo.FabButton;assembly=FluToDo"
              x:Class="FluToDo.TodoPage">
 
   <ContentPage.ToolbarItems>
-    <ToolbarItem Name="Log Out" Command="{Binding NewItemCommand}" Order="Primary" Priority="0">
-      <ToolbarItem.Icon>
-        <OnPlatform x:TypeArguments="FileImageSource"
-                    Android="icon.png" />
-      </ToolbarItem.Icon>
-    </ToolbarItem>
+    <ToolbarItem Name="New Item" Command="{Binding NewItemCommand}" Order="Primary" Priority="0" />
   </ContentPage.ToolbarItems>
 
-  <StackLayout>
-  <ListView x:Name="listview" IsPullToRefreshEnabled="true">
-    <ListView.ItemTemplate>
-      <DataTemplate>
-        <ViewCell>
-          <ViewCell.ContextActions>
-            <MenuItem Clicked="OnChangeStatus" CommandParameter="{Binding .}"
-               Text="Change Status" />
-            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-               Text="Delete" IsDestructive="True" />
-          </ViewCell.ContextActions>
-          <StackLayout Orientation="Horizontal" Padding="15,0">
-            <Label Text="{Binding Name}" />
-            <Image Source="icon.png" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsComplete}" />
-          </StackLayout>
-        </ViewCell>
-      </DataTemplate>
-    </ListView.ItemTemplate>
-  </ListView>
-  </StackLayout>
+<AbsoluteLayout VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+   <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1" Padding="5">
+      <ListView x:Name="listview" IsPullToRefreshEnabled="true" VerticalOptions="FillAndExpand" ItemTapped="OnItemTapped" >
+        <ListView.ItemTemplate>
+          <DataTemplate>
+            <ViewCell>
+              <ViewCell.ContextActions>
+                <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}" Text="Delete" IsDestructive="True" />
+              </ViewCell.ContextActions>
+              <StackLayout Orientation="Horizontal" Padding="15,0">
+                <Label Text="{Binding Name}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand" Margin="0,5" />
+                <Image Source="check.png" HorizontalOptions="EndAndExpand" IsVisible="{Binding IsComplete}" />
+              </StackLayout>
+            </ViewCell>
+          </DataTemplate>
+        </ListView.ItemTemplate>
+      </ListView>
+    </StackLayout>
+   <fab:FloatingActionButtonView x:Name="fab"
+      AbsoluteLayout.LayoutFlags="PositionProportional"
+      AbsoluteLayout.LayoutBounds="1,1,AutoSize,AutoSize"
+      ImageName="ic_add.png"
+      ColorNormal="#ff3b80"
+      ColorPressed="Gray"
+      ColorRipple="#ff3b80"
+      Command="{Binding NewItemCommand}"
+      ParentList="{Binding Source={x:Reference listview}, Path=.}" Margin="0,0,15,0"/>
+  </AbsoluteLayout>
 </ContentPage>
