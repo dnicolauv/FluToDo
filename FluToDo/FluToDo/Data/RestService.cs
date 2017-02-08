@@ -19,12 +19,8 @@ namespace FluToDo.Data
 
         public RestService()
         {
-            //var authData = string.Format("{0}:{1}", Settings.Username, Settings.Password);
-            //var authHeaderValue = Convert.ToBase64String(Encoding.UTF8.GetBytes(authData));
-
             client = new HttpClient();
             client.MaxResponseContentBufferSize = 256000;
-            //client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", authHeaderValue);
         }
 
         public async Task<List<TodoItem>> GetDataAsync()
